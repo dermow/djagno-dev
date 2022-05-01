@@ -1,0 +1,40 @@
+{# Load the tag library #}
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      {# Display a form #}
+      <form action="/url/to/submit/" method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+          <button type="submit" class="btn btn-primary">
+            Submit
+          </button>
+        {% endbuttons %}
+      </form>
+    </div>
+    <div class="col-md-4">
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Phone</th>
+        </tr>
+        {% for entry in entries %}
+          <tr><td>{{ entry }}</td><td>0</td><td>0</td></tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+ 
+</div>
+
