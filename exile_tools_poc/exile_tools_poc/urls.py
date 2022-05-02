@@ -18,6 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('gemplanner/', include('gemplanner.urls')),
-    path('testui/', include('bootstraptest.urls')),
     path('admin/', admin.site.urls),
+    path('', include('gemplanner.urls'))
 ]

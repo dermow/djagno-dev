@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'django_extensions',
     'gemplanner.apps.GemplannerConfig',
     'bootstrap5',
-    'bootstraptest.apps.BootstraptestConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

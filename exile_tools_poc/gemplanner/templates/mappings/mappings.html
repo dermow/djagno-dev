@@ -1,0 +1,29 @@
+{# Load the tag library #}
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table">
+        <tr>
+          <th>Quest</th>
+          <th>Class</th>
+          <th>Gem</th>
+          <th>Type</th>
+        </tr>
+        {% for entry in entries %}
+          <tr><td>{{ entry.quest.title }}</td><td>{{ entry.class_name }}</td><td>{{ entry.gem.name }}</td><td>{{ entry.achieve_type }}</td></tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+ 
+</div>
+
