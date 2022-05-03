@@ -1,0 +1,39 @@
+{# Load the tag library #}
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+<form action="." method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+<div class="container">
+    <div class="row">
+      <h2>{{ gems }}</h2>
+      <div class="col-md-6">
+        <table class="table">
+          <tr>
+            <th>Class</th>
+            <th>Act</th>
+            <th>Quest</th>
+            <th>Type</th>
+          </tr>
+          {% for entry in mappings %}
+            <tr>
+                <td>{{ entry.class_name }}</td>
+                <td>{{ entry.quest.act }} </td>
+                <td>{{ entry.quest.title }} </td>
+                <td>{{ entry.achieve_type }} </td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+   
+  </div>

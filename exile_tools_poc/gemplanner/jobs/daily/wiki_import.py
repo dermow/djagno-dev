@@ -53,11 +53,14 @@ class POEQuestRewardWikiImporter(HTMLParser):
     current_table = 'reward'
     quest = None
 
-    def handle_data(self, data):
-        if 'Vendor rewards' in data:
-            self.current_table = 'vendor'
-
     def handle_starttag(self, tag, attrs):
+        if tag == 'span':
+            for key, value in attrs:
+                if key == 'id' and value == 'Vendor_rewards':
+                    self.current_table = 'vendor'
+                    self.class_index = 0
+                    
+
         if tag == 'a':
             for key, value in attrs:
                 if key == 'title':
@@ -142,6 +145,7 @@ class Job(DailyJob):
         models.QuestRewardMapping.objects.all().delete()
 
     def quest_import(self):
+        '''Quest Import'''
         # QUEST IMPORT
         print('importing quests')
         r_quests = requests.get('https://www.poewiki.net/wiki/Quest')
@@ -156,6 +160,7 @@ class Job(DailyJob):
             quest_object.save()
 
             # Map gem rewards
+            print(f"Import mappings for quest: {quest_object.title}")
             reward_parser = POEQuestRewardWikiImporter()
             reward_parser.quest = quest_object
             r_rewards = requests.get(f"https://poewiki.net{quest_object.url}")
@@ -169,7 +174,6 @@ class Job(DailyJob):
         r_skills = requests.get('https://www.poewiki.net/wiki/List_of_skill_gems')
         parser = POESkillGemWikiImporter()
         parser.feed(r_supports.text)
-        
         parser = POESkillGemWikiImporter()
         parser.feed(r_skills.text)
 
@@ -177,9 +181,3 @@ class Job(DailyJob):
             gem = models.SkillGem()
             gem.name = entry['name']
             gem.save()
-
-
-#    r_quests = requests.get('https://www.poewiki.net/wiki/The_Siren%27s_Cadence')
-#    parser = POEQuestRewardWikiImporter()
-#    parser.quest = models.Quest.objects.get(id=1)
-#    parser.feed(r_quests.text)

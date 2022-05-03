@@ -3,9 +3,18 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from gemplanner.models import Quest, QuestRewardMapping, SkillGem
 
+from . import forms
+
 def index(request):
     '''base view'''
-    return HttpResponse(f"page is under construction")
+    form = forms.SimpleGemList()
+    gems = []
+    mappings = []
+    if request.method == 'POST':
+        gems = request.POST['gem_list']
+        gem_object = SkillGem.objects.get(name=gems)
+        mappings = QuestRewardMapping.objects.filter(gem=gem_object)
+    return render(request, 'form/form.html', {'form': form, 'request': request, 'gems': gems, 'mappings': mappings})
 
 def quests(request):
     '''list of all quests'''
