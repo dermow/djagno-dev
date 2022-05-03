@@ -1,4 +1,10 @@
 verison: '3'
 services:
+  proxy:
+    image: nginx:latest
+    ports:
+      - 8080:80
+    links:
+      - app:app
   app:
     build: .

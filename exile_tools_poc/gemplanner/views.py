@@ -3,7 +3,6 @@ import base64
 from django.http import HttpResponse
 from django.shortcuts import render
 from gemplanner.models import Quest, QuestRewardMapping, SkillGem
-import pastebin
 import requests
 import zlib
 
