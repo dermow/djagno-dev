@@ -13,6 +13,7 @@ def index(request):
     form = forms.PasteBinForm()
     pb_url = ""
     pb_data = ""
+    decompressed = ""
 
     if request.method == 'POST':
         if request.POST['pastebin_url']:
