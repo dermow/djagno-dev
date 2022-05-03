@@ -21,9 +21,9 @@ def index(request):
             r_pb = requests.get(pb_url)
             pb_data = r_pb.text.replace('_', '/').replace('-', '+')
             decoded = base64.b64decode(pb_data)
-            decompressed = zlib.decompress(decoded).decode('UTF-8')
+            #decompressed = zlib.decompress(decoded).decode('UTF-8')
 
-    return render(request, 'planner/planner.html', {'form': form, 'request': request, 'data': decompressed})
+    return render(request, 'planner/planner.html', {'form': form, 'request': request, 'data': decoded})
 
 def quests(request):
     '''list of all quests'''
