@@ -1,20 +1,29 @@
 '''views'''
+import base64
 from django.http import HttpResponse
 from django.shortcuts import render
 from gemplanner.models import Quest, QuestRewardMapping, SkillGem
+import pastebin
+import requests
+import zlib
 
 from . import forms
 
 def index(request):
     '''base view'''
-    form = forms.SimpleGemList()
-    gems = []
-    mappings = []
+    form = forms.PasteBinForm()
+    pb_url = ""
+    pb_data = ""
+
     if request.method == 'POST':
-        gems = request.POST['gem_list']
-        gem_object = SkillGem.objects.get(name=gems)
-        mappings = QuestRewardMapping.objects.filter(gem=gem_object)
-    return render(request, 'form/form.html', {'form': form, 'request': request, 'gems': gems, 'mappings': mappings})
+        if request.POST['pastebin_url']:
+            pb_url = request.POST['pastebin_url']
+            r_pb = requests.get(pb_url)
+            pb_data = r_pb.text.replace('_', '/').replace('-', '+')
+            decoded = base64.b64decode(pb_data)
+            decompressed = zlib.decompress(decoded).decode('UTF-8')
+
+    return render(request, 'planner/planner.html', {'form': form, 'request': request, 'data': decompressed})
 
 def quests(request):
     '''list of all quests'''

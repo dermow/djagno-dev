@@ -5,3 +5,6 @@ class MyForm(forms.Form):
 
 class SimpleGemList(forms.Form):
     gem_list = forms.CharField(label='Gems')
+
+class PasteBinForm(forms.Form):
+    pastebin_url = forms.URLField(label='Pastebin URL')
