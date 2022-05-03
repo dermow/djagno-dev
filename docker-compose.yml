@@ -1,10 +1,11 @@
-verison: '3'
+version: '3'
+volumes:
+  app:
 services:
-  proxy:
-    image: nginx:latest
-    ports:
-      - 8080:80
-    links:
-      - app:app
   app:
     build: .
+    ports:
+      - "8080:8000"
+    volumes:
+      - app:/app
+    

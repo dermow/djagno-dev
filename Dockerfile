@@ -3,4 +3,4 @@ ADD ./requirements.txt .
 COPY ./exile_tools_poc /app
 RUN pip install -r requirements.txt
 RUN chmod u+x app/manage.py
-CMD cd app && ./manage.py runserver
+ENTRYPOINT ["/app/manage.py", "runserver", "0.0.0.0:8000"]

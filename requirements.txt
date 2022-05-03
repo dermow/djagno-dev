@@ -3,5 +3,3 @@ django-extensions
 django-bootstrap-v5
 django-bootstrap-form
 requests
-beautifulsoup4
-lxml
