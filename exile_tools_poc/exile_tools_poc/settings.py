@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-%59&2#u_*w=)89vu&-b(9+a_s8oxdusbi90kk=gpmv5n9#z^t*
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+CSRF_TRUSTED_ORIGINS = ['https://exile-tools.com']
 
 # Application definition
 
