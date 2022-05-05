@@ -17,3 +17,22 @@
     </div>
 </div>
 
+<div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table">
+          <tr>
+            <th>Instruction</th>
+          </tr>
+          {% for entry in data.instructions %}
+            <tr>
+                <td>{{ entry }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+   
+  </div>
+
+  {{ data }}
